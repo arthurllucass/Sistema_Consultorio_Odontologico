@@ -1,9 +1,8 @@
 package com.arthurllucass.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.arthurllucass.model.enums.StatusCadastro;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,31 +17,31 @@ public class Paciente implements Serializable {
     private Long id;
 
     private String nome;
+
+    @Column(unique = true)
     private String cpf;
+
     private String telefone;
     private String email;
     private LocalDate dataNascimento;
     private String observacao;
+    private Integer statusCadastro;
 
     public Paciente() {
     }
 
-    public Paciente(Long id, String nome, String cpf, String telefone, String email, LocalDate dataNascimento, String observacao) {
-        this.id = id;
+    public Paciente(String nome, String cpf, String telefone, String email, LocalDate dataNascimento, String observacao, StatusCadastro statusCadastro) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.observacao = observacao;
+        setStatusCadastro(statusCadastro);
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -86,8 +85,15 @@ public class Paciente implements Serializable {
     }
 
     public String getObservacao() {
-
         return observacao;
+    }
+
+    public StatusCadastro getStatusCadastro() {
+        return StatusCadastro.valueOf(statusCadastro);
+    }
+
+    public void setStatusCadastro(StatusCadastro statusCadastro) {
+        if (statusCadastro != null) this.statusCadastro = statusCadastro.getCodigo();
     }
 
     public void setObservacao(String observacao) {

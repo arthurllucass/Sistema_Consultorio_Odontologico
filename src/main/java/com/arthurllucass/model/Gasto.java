@@ -25,8 +25,7 @@ public class Gasto implements Serializable {
     public Gasto() {
     }
 
-    public Gasto(Long id, String descricao, Double valor, LocalDate data, String tipo) {
-        this.id = id;
+    public Gasto(String descricao, Double valor, LocalDate data, String tipo) {
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
@@ -35,10 +34,6 @@ public class Gasto implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getDescricao() {

@@ -1,5 +1,7 @@
 package com.arthurllucass.model;
 
+import com.arthurllucass.model.enums.StatusCadastro;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +20,13 @@ public class Procedimento implements Serializable {
     private String nome;
     private Float duracaoMinutos;
     private Float valor;
+    private Integer statusCadastro;
 
-    public Procedimento(Long id, String nome, Float duracaoMinutos, Float valor) {
-        this.id = id;
+    public Procedimento (String nome, Float duracaoMinutos, Float valor, StatusCadastro statusCadastro) {
         this.nome = nome;
         this.duracaoMinutos = duracaoMinutos;
         this.valor = valor;
+        setStatusCadastro(statusCadastro);
     }
 
     public Procedimento() {
@@ -31,10 +34,6 @@ public class Procedimento implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -59,6 +58,14 @@ public class Procedimento implements Serializable {
 
     public void setValor(Float valor) {
         this.valor = valor;
+    }
+
+    public StatusCadastro getStatusCadastro() {
+        return StatusCadastro.valueOf(statusCadastro);
+    }
+
+    public void setStatusCadastro(StatusCadastro statusCadastro) {
+        if (statusCadastro != null)  this.statusCadastro = statusCadastro.getCodigo();
     }
 
     @Override

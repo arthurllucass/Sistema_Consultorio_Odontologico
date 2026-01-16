@@ -21,26 +21,21 @@ public class Material implements Serializable {
     private Integer quantidadeAtual;
     private Integer quantidadeMinima;
     private Float custo;
-    private StatusCadastro statusCadastro;
+    private Integer statusCadastro;
 
     public Material() {
     }
 
-    public Material(Long id, String nome, Integer quantidadeAtual, Integer quantidadeMinima, Float custo, StatusCadastro statusCadastro) {
-        this.id = id;
+    public Material(String nome, Integer quantidadeAtual, Integer quantidadeMinima, Float custo, StatusCadastro statusCadastro) {
         this.nome = nome;
         this.quantidadeAtual = quantidadeAtual;
         this.quantidadeMinima = quantidadeMinima;
         this.custo = custo;
-        this.statusCadastro = statusCadastro;
+        setStatusCadastro(statusCadastro);
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -76,11 +71,11 @@ public class Material implements Serializable {
     }
 
     public StatusCadastro getStatusCadastro() {
-        return statusCadastro;
+        return StatusCadastro.valueOf(statusCadastro);
     }
 
     public void setStatusCadastro(StatusCadastro statusCadastro) {
-        this.statusCadastro = statusCadastro;
+        if (statusCadastro != null) this.statusCadastro = statusCadastro.getCodigo();
     }
 
     @Override

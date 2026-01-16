@@ -1,13 +1,12 @@
 package com.arthurllucass.model;
 
 import com.arthurllucass.model.enums.StatusAgendamento;
+import com.arthurllucass.model.enums.StatusAtendimento;
+import com.arthurllucass.model.enums.StatusCadastro;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -19,30 +18,28 @@ public class Atendimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "id_agendamento")
     private Agendamento agendamento;
-    private LocalDate dataHoraInicio;
-    private LocalDate dataHoraFim;
+    
+    private LocalDateTime dataHoraInicio;
+    private LocalDateTime dataHoraFim;
     private String observacoesClinicas;
-    private StatusAgendamento statusAgendamento;
+    private Integer statusAtendimento;
 
     public Atendimento() {
     }
 
-    public Atendimento(Long id, Agendamento agendamento, LocalDate dataHoraInicio, LocalDate dataHoraFim, String observacoesClinicas, StatusAgendamento statusAgendamento) {
-        this.id = id;
+    public Atendimento(Agendamento agendamento, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String observacoesClinicas, StatusAtendimento statusAtendimento) {
         this.agendamento = agendamento;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.observacoesClinicas = observacoesClinicas;
-        this.statusAgendamento = statusAgendamento;
+        setStatusAtendimento(statusAtendimento);
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Agendamento getAgendamento() {
@@ -53,19 +50,19 @@ public class Atendimento implements Serializable {
         this.agendamento = agendamento;
     }
 
-    public LocalDate getDataHoraInicio() {
+    public LocalDateTime getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(LocalDate dataHoraInicio) {
+    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public LocalDate getDataHoraFim() {
+    public LocalDateTime getDataHoraFim() {
         return dataHoraFim;
     }
 
-    public void setDataHoraFim(LocalDate dataHoraFim) {
+    public void setDataHoraFim(LocalDateTime dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
@@ -77,12 +74,11 @@ public class Atendimento implements Serializable {
         this.observacoesClinicas = observacoesClinicas;
     }
 
-    public StatusAgendamento getStatusAgendamento() {
-        return statusAgendamento;
+    public StatusAtendimento getStatusAtendimento()  {return StatusAtendimento.valueOf(statusAtendimento);
     }
 
-    public void setStatusAgendamento(StatusAgendamento statusAgendamento) {
-        this.statusAgendamento = statusAgendamento;
+    public void setStatusAtendimento(StatusAtendimento statusAtendimento) {
+        if (statusAtendimento != null) this.statusAtendimento = statusAtendimento.getCodigo();
     }
 
     @Override

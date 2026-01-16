@@ -17,6 +17,7 @@ public class MovimentoEstoque implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     private Material material;
     private Integer quantidade;
     private String tipo;
@@ -26,8 +27,7 @@ public class MovimentoEstoque implements Serializable {
     public MovimentoEstoque() {
     }
 
-    public MovimentoEstoque(Long id, Material material, Integer quantidade, String tipo, LocalDateTime dataHora, Atendimento atendimento) {
-        this.id = id;
+    public MovimentoEstoque(Material material, Integer quantidade, String tipo, LocalDateTime dataHora, Atendimento atendimento) {
         this.material = material;
         this.quantidade = quantidade;
         this.tipo = tipo;
@@ -37,10 +37,6 @@ public class MovimentoEstoque implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Material getMaterial() {

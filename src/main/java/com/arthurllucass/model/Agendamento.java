@@ -2,12 +2,9 @@ package com.arthurllucass.model;
 
 import com.arthurllucass.model.enums.StatusAgendamento;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -18,17 +15,23 @@ public class Agendamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_paciente")
     private Paciente paciente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_procedimento")
     private Procedimento procedimento;
-    private LocalDate dataHoraInicio;
-    private LocalDate dataHoraFim;
+
+    private LocalDateTime dataHoraInicio;
+    private LocalDateTime dataHoraFim;
     private StatusAgendamento status;
 
     public Agendamento() {
     }
 
-    public Agendamento(Long id, Paciente paciente, Procedimento procedimento, LocalDate dataHoraInicio, LocalDate dataHoraFim, StatusAgendamento status) {
-        this.id = id;
+    public Agendamento(Paciente paciente, Procedimento procedimento, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, StatusAgendamento status) {
         this.paciente = paciente;
         this.procedimento = procedimento;
         this.dataHoraInicio = dataHoraInicio;
@@ -38,10 +41,6 @@ public class Agendamento implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Paciente getPaciente() {
@@ -60,19 +59,19 @@ public class Agendamento implements Serializable {
         this.procedimento = procedimento;
     }
 
-    public LocalDate getDataHoraInicio() {
+    public LocalDateTime getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(LocalDate dataHoraInicio) {
+    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public LocalDate getDataHoraFim() {
+    public LocalDateTime getDataHoraFim() {
         return dataHoraFim;
     }
 
-    public void setDataHoraFim(LocalDate dataHoraFim) {
+    public void setDataHoraFim(LocalDateTime dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
