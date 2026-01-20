@@ -1,4 +1,4 @@
-package com.arthurllucass.model;
+package com.arthurllucass.model.entity;
 
 import com.arthurllucass.model.enums.StatusCadastro;
 

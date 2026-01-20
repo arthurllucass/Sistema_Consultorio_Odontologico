@@ -1,9 +1,6 @@
-package com.arthurllucass.model;
+package com.arthurllucass.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,11 +14,16 @@ public class MovimentoEstoque implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @ManyToOne
+    @JoinColumn(name = "id_material")
     private Material material;
+
     private Integer quantidade;
     private String tipo;
     private LocalDateTime dataHora;
+
+    @ManyToOne
+    @JoinColumn(name = "id_atendimento")
     private Atendimento atendimento;
 
     public MovimentoEstoque() {

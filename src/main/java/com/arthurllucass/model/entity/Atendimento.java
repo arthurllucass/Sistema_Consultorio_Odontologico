@@ -1,8 +1,6 @@
-package com.arthurllucass.model;
+package com.arthurllucass.model.entity;
 
-import com.arthurllucass.model.enums.StatusAgendamento;
 import com.arthurllucass.model.enums.StatusAtendimento;
-import com.arthurllucass.model.enums.StatusCadastro;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +19,7 @@ public class Atendimento implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_agendamento")
     private Agendamento agendamento;
-    
+
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String observacoesClinicas;

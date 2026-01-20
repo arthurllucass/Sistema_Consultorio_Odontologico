@@ -1,4 +1,4 @@
-package com.arthurllucass.model;
+package com.arthurllucass.model.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
